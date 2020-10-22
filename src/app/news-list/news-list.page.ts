@@ -14,13 +14,13 @@ export class NewsListPage implements OnInit {
         console.log('app component constructor called');
     }
 
+
     ngOnInit() {
         // load articles
         this.newsApi.initArticles().subscribe(data => this.mArticles = data[`articles`]);
         // load news sources
         this.newsApi.initSources().subscribe(data => this.mSources = data[`sources`]);
     }
-
     searchArticles(source) {
         console.log(`selected source is: ${source}`);
         this.newsApi.getArticlesByID(source).subscribe(data => this.mArticles = data[`articles`]);

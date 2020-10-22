@@ -5,12 +5,14 @@
 </ion-header>
 
 <ion-content>
-    <div *ngFor="let source of mSources">
-        <a class="source-name"> {{source.name}}</a>
-    </div>
-    <div *ngFor="let article of mArticles">
-        <p>{{article.title }}</p>
-        <p>{{ article.source.name}}</p>
-        <p>{{article.description}}</p>
-    </div>
+    <ion-list>
+        <ion-item [routerLink]="['/news-list', source.id]" *ngFor="let source of mSources">
+            <ion-label> {{source.name}}</ion-label>
+        </ion-item>
+    </ion-list>
+    <ion-card *ngFor="let article of mArticles">
+        <ion-card-title>{{article.title }}</ion-card-title>
+        <ion-card-subtitle>{{article.source.name}}</ion-card-subtitle>
+        <ion-card-content>{{article.description}}</ion-card-content>
+    </ion-card>
 </ion-content>
