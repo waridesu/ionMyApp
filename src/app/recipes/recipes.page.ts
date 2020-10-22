@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Recipe} from './recipe.model';
-import {RecipesService} from './recipes.service';
+import {RecipesService} from '../service/recipes.service';
 
 @Component({
     selector: 'app-recipes',
@@ -12,7 +12,8 @@ export class RecipesPage implements OnInit {
 
     constructor(private recipesService: RecipesService) {
     }
-    ngOnInit() {
+    ngOnInit() {}
+    ionViewWillEnter(){
         this.recipes = this.recipesService.getAllRecipes();
     }
 

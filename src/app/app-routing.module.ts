@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'recipes',
+    redirectTo: 'news-list',
     pathMatch: 'full'
   },
   {
@@ -24,6 +24,11 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'news-list',
+    loadChildren: () => import('./news-list/news-list.module').then( m => m.NewsListPageModule)
+  },
+
 ];
 
 @NgModule({

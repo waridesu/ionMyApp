@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {RecipesService} from '../recipes.service';
+import {RecipesService} from '../../service/recipes.service';
 import {Recipe} from '../recipe.model';
 import {AlertController} from '@ionic/angular';
 
