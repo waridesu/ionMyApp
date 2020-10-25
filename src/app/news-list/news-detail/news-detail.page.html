@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>news-detail</ion-title>
+    <ion-title>{{article.author}}</ion-title>
+    <ion-back-button slot="start" defaultHref="/news-list"></ion-back-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-img [src]="article.urlToImage"></ion-img>
+    <ion-card-content>
+      <ion-card-title>{{article.title}}</ion-card-title>
+      <p>{{article.description}}</p>
+    </ion-card-content>
+    <ion-button expand="block">subscribe</ion-button>
+  </ion-card>
 </ion-content>

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NewsApiService} from '../service/news-api.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-news-list',
@@ -7,22 +8,42 @@ import {NewsApiService} from '../service/news-api.service';
     styleUrls: ['./news-list.page.scss'],
 })
 export class NewsListPage implements OnInit {
-    mSources: Array<any>;
-    mArticles: Array<any>;
+    data: any;
+    page = 1;
 
-    constructor(public newsApi: NewsApiService) {
+    constructor(private newsApi: NewsApiService, private router: Router) {
         console.log('app component constructor called');
     }
 
 
     ngOnInit() {
-        // load articles
-        this.newsApi.initArticles().subscribe(data => this.mArticles = data[`articles`]);
-        // load news sources
-        this.newsApi.initSources().subscribe(data => this.mSources = data[`sources`]);
+        this.newsApi.getData('top-headlines?country=us&category=business&pageSize=10&page=${this.page}').subscribe(data => {
+            console.log(data);
+            this.data = data;
+        });
     }
-    searchArticles(source) {
-        console.log(`selected source is: ${source}`);
-        this.newsApi.getArticlesByID(source).subscribe(data => this.mArticles = data[`articles`]);
+
+    onSingleNews(article) {
+        this.newsApi.currentArticle = article;
+        this.router.navigate(['news-list/news-detail']);
+    }
+    loadMoreNews(event) {
+        this.page++;
+        console.log(event);
+        this.newsApi
+            .getData(
+                `top-headlines?country=us&category=business&pageSize=5&page=${
+                    this.page
+                }`
+            )
+            .subscribe(data => {
+                // console.log(data);
+                // this.data = data;
+                for (const article of data[`articles`]) {
+                    this.data.articles.push(article);
+                }
+                event.target.complete();
+                console.log(this.data);
+            });
     }
 }

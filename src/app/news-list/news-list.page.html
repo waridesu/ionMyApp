@@ -4,15 +4,14 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-list>
-        <ion-item [routerLink]="['/news-list', source.id]" *ngFor="let source of mSources">
-            <ion-label> {{source.name}}</ion-label>
-        </ion-item>
-    </ion-list>
-    <ion-card *ngFor="let article of mArticles">
-        <ion-card-title>{{article.title }}</ion-card-title>
-        <ion-card-subtitle>{{article.source.name}}</ion-card-subtitle>
-        <ion-card-content>{{article.description}}</ion-card-content>
+<ion-content >
+
+    <ion-card *ngFor="let article of data?.articles" (click)="onSingleNews(article)">
+        <ion-card-content>
+        <ion-card-title>{{article.title}}</ion-card-title>
+        </ion-card-content>
     </ion-card>
+    <ion-infinite-scroll (ionInfinite)="loadMoreNews($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubble" loadingText="load news.."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
