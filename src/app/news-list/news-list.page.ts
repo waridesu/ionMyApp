@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
     styleUrls: ['./news-list.page.scss'],
 })
 export class NewsListPage implements OnInit {
-    data: any;
+    articles;
     page = 1;
 
     constructor(private newsApi: NewsApiService, private router: Router) {
@@ -17,16 +17,21 @@ export class NewsListPage implements OnInit {
 
 
     ngOnInit() {
-        this.newsApi.getData('top-headlines?country=us&category=business&pageSize=10&page=${this.page}').subscribe(data => {
+    }
+
+    ionViewDidEnter() {
+        this.newsApi.getData('top-headlines?country=us&category=business&pageSize=10&page=${this.page}').subscribe((data) => {
             console.log(data);
-            this.data = data;
+            this.articles = data[`articles`];
         });
     }
+
 
     onSingleNews(article) {
         this.newsApi.currentArticle = article;
         this.router.navigate(['news-list/news-detail']);
     }
+
     loadMoreNews(event) {
         this.page++;
         console.log(event);
@@ -40,10 +45,9 @@ export class NewsListPage implements OnInit {
                 // console.log(data);
                 // this.data = data;
                 for (const article of data[`articles`]) {
-                    this.data.articles.push(article);
+                    this.articles.push(article);
                 }
                 event.target.complete();
-                console.log(this.data);
             });
     }
 }
