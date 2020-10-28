@@ -14,4 +14,11 @@ export class NewsApiService {
     getData(url){
         return this.http.get(`${this.apiUrl}/${url}&apiKey=${this.apiKey}`);
     }
+    getArticle(artUrl: string) {
+        return {
+            ...this.currentArticle.find(article => {
+                return article.url === artUrl;
+            })
+        };
+    }
 }
