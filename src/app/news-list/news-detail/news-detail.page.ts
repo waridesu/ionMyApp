@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NewsApiService} from '../../service/news-api.service';
 import {SocialSharing} from '@ionic-native/social-sharing/ngx';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-news-detail',
@@ -9,19 +9,15 @@ import {ActivatedRoute} from '@angular/router';
     styleUrls: ['./news-detail.page.scss'],
 })
 export class NewsDetailPage implements OnInit {
-    article;
+    article = this.NewsApi.getArticle();
     link = this.article.url;
 
 
     constructor(private NewsApi: NewsApiService,
-                private socialSharing: SocialSharing,
-                private activatedRoute: ActivatedRoute) {
+                private socialSharing: SocialSharing) {
     }
 
-    ngOnInit() {
-        this.link = this.activatedRoute.snapshot.paramMap.get('link');
-        console.log(this.link);
-    }
+    ngOnInit() {}
 
     ShareGeneric() {
         this.socialSharing.share('Optional message', 'Optional title', null, this.link = this.NewsApi.currentArticle.url).then(() => {
