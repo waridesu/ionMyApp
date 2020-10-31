@@ -9,19 +9,24 @@ import {ActivatedRoute, Router} from '@angular/router';
     styleUrls: ['./news-detail.page.scss'],
 })
 export class NewsDetailPage implements OnInit {
-    article = this.NewsApi.getArticle();
-    link = this.article.url;
+    curArticle: Array<any>;
+    some;
 
 
     constructor(private NewsApi: NewsApiService,
                 private socialSharing: SocialSharing) {
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.NewsApi.getArticle('everything?').subscribe((data) => {
+            this.curArticle = data[`articles`];
+            console.log(data);
+            console.log(this.curArticle);
+        });
+    }
 
     ShareGeneric() {
-        this.socialSharing.share('Optional message', 'Optional title', null, this.link = this.NewsApi.currentArticle.url).then(() => {
-          console.log(this.link);
+        this.socialSharing.share('Optional message', 'Optional title', null, ).then(() => {
         }).catch(() => {
         });
     }

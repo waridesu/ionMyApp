@@ -14,7 +14,8 @@ export class NewsApiService {
     getData(url){
         return this.http.get(`${this.apiUrl}/${url}&apiKey=${this.apiKey}`);
     }
-    getArticle() {
-        return this.currentArticle;
+    getArticle(url) {
+        console.log(this.currentArticle.title);
+        return this.http.get(`${this.apiUrl}/${url}qInTitle=${this.currentArticle.title}&apiKey=${this.apiKey}`);
     }
 }

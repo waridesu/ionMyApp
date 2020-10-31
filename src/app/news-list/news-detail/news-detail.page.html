@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{article.author}}</ion-title>
+    <ion-title></ion-title>
     <ion-back-button slot="start" defaultHref="/news-list"></ion-back-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card *ngFor="let article of curArticle">
     <ion-img [src]="article.urlToImage"></ion-img>
     <ion-card-content>
       <ion-card-title>{{article.title}}</ion-card-title>

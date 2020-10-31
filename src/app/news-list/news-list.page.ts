@@ -20,7 +20,7 @@ export class NewsListPage implements OnInit {
     }
 
     ionViewDidEnter() {
-        this.newsApi.getData('top-headlines?country=us&category=business&pageSize=10&page=${this.page}').subscribe((data) => {
+        this.newsApi.getData('everything?q=bitcoin&pageSize=10&page=${this.page}').subscribe((data) => {
             console.log(data);
             this.articles = data[`articles`];
         });
