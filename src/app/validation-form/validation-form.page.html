@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button *ngIf="name" slot="start" fill="clear" (click)="removePost()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>validation-form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="!name; else formInfo">
+    <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+      <ion-item>
+        <ion-label position="floating">name</ion-label>
+        <ion-input formControlName="name"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of error.message">
+        <ion-text *ngIf="rForm.get('name').hasError(validation.type) && (rForm.get('name').dirty || rForm.get('name').touched)" >{{validation.message}}</ion-text>
+      </ng-container>
+      <ion-item>
+        <ion-label position="floating">description</ion-label>
+        <ion-textarea formControlName="description"></ion-textarea>
+      </ion-item>
+      <ng-container *ngFor="let validation of error.message">
+        <ion-text *ngIf="rForm.get('description').hasError(validation.type) && (rForm.get('description').dirty || rForm.get('description').touched)" >{{validation.message}}</ion-text>
+      </ng-container>
+      <ion-item>
+        <ion-label>on</ion-label>
+        <ion-checkbox slot="start" formControlName="validate"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-select placeholder="Select One" formControlName="select">
+          <ion-select-option value="1">1</ion-select-option>
+          <ion-select-option value="2">2</ion-select-option>
+          <ion-select-option value="3">3</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button expand="block" type="submit" [disabled]="!rForm.valid">post</ion-button>
+    </form>
+  </ion-list>
+  <ng-template #formInfo>
+    <ion-card>
+      <ion-card-content>
+        <ion-card-title>{{name}}</ion-card-title>
+        <ion-text>{{description}}</ion-text>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+</ion-content>

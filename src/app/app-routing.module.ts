@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'news-list',
+    redirectTo: 'validation-form',
     pathMatch: 'full'
   },
   {
@@ -36,7 +36,12 @@ const routes: Routes = [
         loadChildren: () => import('./news-list/news-detail/news-detail.module').then(m => m.NewsDetailPageModule)
       }
     ]
+  },
+  {
+    path: 'validation-form',
+    loadChildren: () => import('./validation-form/validation-form.module').then( m => m.ValidationFormPageModule)
   }
+
 ];
 
 @NgModule({
