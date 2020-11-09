@@ -18,7 +18,7 @@ export class NewsDetailPage implements OnInit {
 
     ngOnInit() {
         this.ac.queryParams.subscribe( (res) => {
-            this.item = [JSON.parse(res.item)];
+            this.item = JSON.parse(res.item);
         });
     }
 

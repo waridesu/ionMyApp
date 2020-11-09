@@ -29,7 +29,7 @@ export class NewsListPage implements OnInit {
 
     onSingleNews(item) {
         this.router.navigate(['news-list/' + item.source.name],
-        {queryParams: {item: JSON.stringify(item)}});
+        {queryParams: {item: JSON.stringify(item)}, skipLocationChange: true });
     }
 
     loadMoreNews(event) {
