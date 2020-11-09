@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NewsApiService} from '../../service/news-api.service';
 import {SocialSharing} from '@ionic-native/social-sharing/ngx';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-news-detail',
@@ -9,19 +9,16 @@ import {ActivatedRoute, Router} from '@angular/router';
     styleUrls: ['./news-detail.page.scss'],
 })
 export class NewsDetailPage implements OnInit {
-    curArticle: Array<any>;
-    some;
+    item;
 
 
     constructor(private NewsApi: NewsApiService,
-                private socialSharing: SocialSharing) {
+                private socialSharing: SocialSharing, private ac: ActivatedRoute) {
     }
 
     ngOnInit() {
-        this.NewsApi.getArticle('everything?').subscribe((data) => {
-            this.curArticle = data[`articles`];
-            console.log(data);
-            console.log(this.curArticle);
+        this.ac.queryParams.subscribe( (res) => {
+            this.item = [JSON.parse(res.item)];
         });
     }
 

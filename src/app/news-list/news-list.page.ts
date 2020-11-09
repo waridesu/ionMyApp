@@ -27,9 +27,9 @@ export class NewsListPage implements OnInit {
     }
 
 
-    onSingleNews(article) {
-        this.newsApi.currentArticle = article;
-        this.router.navigate(['news-list/' + article.source.name]);
+    onSingleNews(item) {
+        this.router.navigate(['news-list/' + item.source.name],
+        {queryParams: {item: JSON.stringify(item)}});
     }
 
     loadMoreNews(event) {
